@@ -1,0 +1,141 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/the-vision",
+      "destination": "/vision-2030/",
+      "permanent": true
+    },
+    {
+      "source": "/our-alliance",
+      "destination": "/alliance/",
+      "permanent": true
+    },
+    {
+      "source": "/news-resources",
+      "destination": "/updates/",
+      "permanent": true
+    },
+    {
+      "source": "/invest",
+      "destination": "/opportunities/invest/",
+      "permanent": true
+    },
+    {
+      "source": "/startup",
+      "destination": "/opportunities/startup/",
+      "permanent": true
+    },
+    {
+      "source": "/business",
+      "destination": "/opportunities/business/",
+      "permanent": true
+    },
+    {
+      "source": "/employment",
+      "destination": "/opportunities/employment/",
+      "permanent": true
+    },
+    {
+      "source": "/education",
+      "destination": "/opportunities/education/",
+      "permanent": true
+    },
+    {
+      "source": "/health",
+      "destination": "/opportunities/health/",
+      "permanent": true
+    },
+    {
+      "source": "/tourism",
+      "destination": "/opportunities/tourism/",
+      "permanent": true
+    },
+    {
+      "source": "/retirement",
+      "destination": "/opportunities/retirement/",
+      "permanent": true
+    },
+    {
+      "source": "/for-businesses",
+      "destination": "/opportunities/business/",
+      "permanent": true
+    },
+    {
+      "source": "/for-individuals",
+      "destination": "/opportunities/",
+      "permanent": true
+    },
+    {
+      "source": "/next",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/we-did-some-things-exemplary",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/we-are-doing-many-things-enterprising",
+      "destination": "/opportunities/business/",
+      "permanent": true
+    },
+    {
+      "source": "/we-can-do-any-thing-you-can-imagine",
+      "destination": "/opportunities/invest/",
+      "permanent": true
+    },
+    {
+      "source": "/here-to-help",
+      "destination": "/opportunities/",
+      "permanent": true
+    },
+    {
+      "source": "/get-it-done",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/digital-business-transformation",
+      "destination": "/initiatives/",
+      "permanent": true
+    },
+    {
+      "source": "/nxt-partners",
+      "destination": "/alliance/",
+      "permanent": true
+    },
+    {
+      "source": "/nxt-news",
+      "destination": "/updates/",
+      "permanent": true
+    },
+    {
+      "source": "/nxt-launch-day",
+      "destination": "/updates/",
+      "permanent": true
+    },
+    {
+      "source": "/shankar-vanavarayar-launch-day",
+      "destination": "/updates/",
+      "permanent": true
+    },
+    {
+      "source": "/arjun-prakash-launch-day",
+      "destination": "/updates/",
+      "permanent": true
+    },
+    {
+      "source": "/prashanth-subramanian-launch-day",
+      "destination": "/updates/",
+      "permanent": true
+    },
+    {
+      "source": "/downloads",
+      "destination": "/resources/",
+      "permanent": true
+    }
+  ]
+}

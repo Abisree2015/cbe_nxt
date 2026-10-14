@@ -1,0 +1,169 @@
+/* ==========================================================================
+   Coimbatore NXT 2026 — Vision 2030 page (appended to nxt-2026.css)
+   ========================================================================== */
+
+/* At a glance — figures from the pack, the $100bn shown as an ambition */
+.glance { border-bottom: var(--stroke-hairline) solid var(--color-border); background: var(--color-surface); }
+.glance__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; }
+.glance__item { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: var(--space-4); padding: var(--space-15) var(--space-15) var(--space-15) 0; }
+.glance__item + .glance__item { padding-left: var(--space-15); border-left: var(--stroke-hairline) solid var(--color-border); }
+.glance__num { margin: 0; color: var(--color-accent); font-family: var(--font-display); font-size: var(--text-9); line-height: var(--lh-50); font-weight: var(--weight-semibold); letter-spacing: -0.01em; }
+.glance__label { color: var(--color-text-secondary); font-size: var(--text-sm); line-height: var(--lh-20); }
+@media (max-width: 900px) {
+  .glance__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .glance__item:nth-child(3) { padding-left: 0; border-left: 0; }
+  .glance__item:nth-child(n + 3) { border-top: var(--stroke-hairline) solid var(--color-border); }
+}
+@media (max-width: 480px) { .glance__num { font-size: var(--text-4xl); line-height: var(--lh-41); } .glance__item { padding-block: var(--space-12); } }
+
+/* In-page navigation with the current section highlighted */
+.vision-nav .localnav__list { justify-content: center; }
+.vision-nav a { font-size: var(--text-sm); line-height: var(--lh-20); padding: var(--space-4) var(--space-12); }
+.vision-nav a[aria-current="true"] { background: var(--color-surface-dark); color: var(--color-text-on-dark); }
+@media (max-width: 734px) { .vision-nav .localnav__list { justify-content: flex-start; } }
+
+/* North star — statement beside the text; the named conditions as chips */
+.north-star__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-16); align-items: start; }
+.north-star__head .headline-section { margin-top: var(--space-4); font-size: var(--text-10); line-height: var(--lh-60); letter-spacing: -0.015em; }
+.north-star__text { padding-top: var(--space-15); border-top: var(--stroke-thick) solid var(--color-accent); }
+.north-star__lead { font-family: var(--font-display); font-size: var(--text-xl); line-height: var(--lh-32); font-weight: var(--weight-semibold); }
+.north-star__p { margin-top: var(--space-12); font-size: var(--text-lg); line-height: var(--lh-32); color: var(--color-text-secondary); }
+.north-star__chips { display: flex; flex-wrap: wrap; gap: var(--space-7); margin-top: var(--space-15); }
+.north-star__chips li { display: inline-flex; align-items: center; gap: var(--space-4); min-height: var(--hit-target); padding: 0 var(--space-12) 0 var(--space-4); border-radius: var(--radius-lg); background: var(--color-surface-alt); font-size: var(--text-sm); line-height: var(--lh-20); font-weight: var(--weight-semibold); }
+.north-star__chips svg { flex-shrink: 0; width: calc(var(--space-15) + var(--space-1)); height: calc(var(--space-15) + var(--space-1)); padding: var(--space-3); border-radius: var(--radius-lg); background: var(--color-accent); color: var(--color-on-accent); }
+@media (max-width: 1068px) { .north-star__head .headline-section { font-size: var(--text-9); line-height: var(--lh-50); } }
+@media (max-width: 900px) { .north-star__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-15); } }
+@media (max-width: 734px) { .north-star__head .headline-section { font-size: var(--text-3xl); line-height: var(--lh-32); } }
+
+/* Sections clear the sticky bars when reached through the in-page nav */
+#north-star, #goals, #success { scroll-margin-top: calc(var(--nav-height) * 2); }
+.closing--vision .eyebrow { color: var(--color-text-secondary-on-dark); }
+
+/* ---------- What success looks like — sky backdrop, photo-cut outcome cards ---------- */
+.outcomes-section--sky { position: relative; overflow: hidden; isolation: isolate; padding-block: var(--section-space) calc(var(--section-space) + var(--space-18)); background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-alt) 60%, var(--color-surface-alt) 100%); }
+/* Hills skyline faded in at the foot of the section */
+.outcomes-section__skyline { position: absolute; left: 0; right: 0; bottom: 0; z-index: -1; width: 100%; height: calc(var(--space-19) * 0.9); object-fit: cover; object-position: 50% 42%; opacity: 0.55; -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.9) 70%); mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.9) 70%); }
+.outcomes-section--sky .eyebrow { display: inline-flex; align-items: center; gap: var(--space-7); }
+.outcomes-section--sky .eyebrow::before { content: ""; width: var(--space-15); height: var(--stroke-base); background: var(--color-accent); }
+.outcomes-section--sky .split-header .link-cta { font-weight: var(--weight-semibold); }
+.outcomes-section--sky .outcome-grid { gap: var(--space-14); }
+.outcomes-section--sky .outcome-card { position: relative; display: block; min-height: calc(var(--space-19) * 0.6); padding: 0; overflow: hidden; border-radius: var(--radius-md); background: var(--color-surface); border: var(--stroke-hairline) solid var(--color-border); box-shadow: 0 var(--space-4) var(--space-15) rgb(29 29 31 / 0.06); }
+.outcome-card__content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: var(--space-7); width: 64%; height: 100%; padding: var(--space-12) var(--space-7) var(--space-15) var(--space-12); }
+.outcomes-section--sky .outcome-card__index { margin: 0; order: -1; }
+/* Tick inside a soft halo */
+.outcomes-section--sky .outcome-card__tick { width: calc(var(--space-16) - var(--space-4)); height: calc(var(--space-16) - var(--space-4)); background: var(--color-accent); box-shadow: 0 0 0 var(--space-4) rgb(0 113 227 / 0.10); margin: var(--space-4) 0 var(--space-4) var(--space-4); }
+.outcomes-section--sky .outcome-card__text { margin-top: auto; font-size: var(--text-lg); line-height: var(--lh-23); }
+/* Photo cut on a diagonal, blending into the card */
+.outcome-card__photo { position: absolute; top: 0; right: 0; bottom: 0; width: 44%; height: 100%; object-fit: cover; clip-path: polygon(28% 0, 100% 0, 100% 100%, 0 100%); transition: transform var(--duration-slow) var(--ease); }
+.outcome-card:hover .outcome-card__photo { transform: scale(var(--scale-hover)); }
+@media (max-width: 1068px) { .outcome-card__content { width: 62%; } }
+@media (max-width: 480px) {
+  .outcomes-section--sky .outcome-card { display: flex; flex-direction: column-reverse; min-height: 0; }
+  .outcome-card__content { width: 100%; padding: var(--space-12); }
+  .outcome-card__photo { position: static; width: 100%; height: auto; aspect-ratio: 16 / 7; clip-path: none; }
+}
+@media (prefers-reduced-motion: reduce) { .outcome-card:hover .outcome-card__photo { transform: none; } }
+/* Refinements: keep text clear of the photo, soften the diagonal, show the hills in the skyline */
+.outcome-card__content { width: 58%; }
+.outcome-card__photo { width: 48%; clip-path: none; -webkit-mask-image: linear-gradient(108deg, transparent 18%, rgb(0 0 0 / 0.6) 30%, rgb(0 0 0) 40%); mask-image: linear-gradient(108deg, transparent 18%, rgb(0 0 0 / 0.6) 30%, rgb(0 0 0) 40%); }
+.outcomes-section__skyline { object-position: 50% 30%; opacity: 0.6; }
+@media (max-width: 1068px) { .outcome-card__content { width: 56%; } }
+@media (max-width: 480px) { .outcome-card__content { width: 100%; } .outcome-card__photo { width: 100%; -webkit-mask-image: none; mask-image: none; } }
+/* Diagonal fade intersected with a left-edge fade so the photo never shows a hard vertical edge */
+.outcome-card__content { width: 57%; }
+.outcome-card__photo { width: 46%;
+  -webkit-mask-image: linear-gradient(108deg, transparent 20%, rgb(0 0 0) 42%), linear-gradient(90deg, transparent 0%, rgb(0 0 0) 30%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(108deg, transparent 20%, rgb(0 0 0) 42%), linear-gradient(90deg, transparent 0%, rgb(0 0 0) 30%);
+  mask-composite: intersect; }
+@media (max-width: 480px) { .outcome-card__photo { width: 100%; -webkit-mask-image: none; mask-image: none; } }
+
+/* ---------- Success cards, v3 — white section, crisp diagonal photo with an accent strip ---------- */
+.outcomes-section--sky { padding-block: var(--section-space); background: var(--color-surface); }
+.outcomes-section--sky .outcome-card { min-height: calc(var(--space-19) * 0.62); border: 0; box-shadow: 0 var(--space-1) var(--space-4) rgb(29 29 31 / 0.04), 0 var(--space-7) var(--space-16) rgb(29 29 31 / 0.08); }
+.outcome-card__content { width: 66%; padding: var(--space-12) var(--space-4) var(--space-15) var(--space-12); }
+.outcomes-section--sky .outcome-card__index { color: var(--color-text-secondary); font-size: var(--text-sm); line-height: var(--lh-20); font-weight: var(--weight-regular); }
+.outcomes-section--sky .outcome-card__tick { width: calc(var(--space-15) + var(--space-3)); height: calc(var(--space-15) + var(--space-3)); margin: var(--space-3) 0 var(--space-3) var(--space-3); box-shadow: 0 0 0 calc(var(--space-4) + var(--nudge)) rgb(0 113 227 / 0.08); }
+.outcomes-section--sky .outcome-card__tick svg { width: var(--space-11); height: var(--space-11); }
+.outcomes-section--sky .outcome-card__text { margin-top: var(--space-4); }
+/* Photo panel: crisp diagonal edge, with a light accent strip running along it */
+.outcome-card__media { position: absolute; top: 0; right: 0; bottom: 0; width: 40%; }
+.outcome-card__media::before { content: ""; position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 24% 100%); background: linear-gradient(180deg, rgb(0 113 227 / 0.22), rgb(41 151 255 / 0.10)); }
+.outcome-card__media .outcome-card__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; -webkit-mask-image: none; mask-image: none; clip-path: polygon(7% 0, 100% 0, 100% 100%, 31% 100%); }
+@media (max-width: 1068px) { .outcome-card__content { width: 64%; } }
+@media (max-width: 480px) {
+  .outcomes-section--sky .outcome-card { display: flex; flex-direction: column-reverse; }
+  .outcome-card__content { width: 100%; padding: var(--space-12); }
+  .outcome-card__media { position: relative; width: 100%; aspect-ratio: 16 / 7; }
+  .outcome-card__media::before { display: none; }
+  .outcome-card__media .outcome-card__photo { clip-path: none; }
+}
+.outcome-card__content { width: 60%; }
+@media (max-width: 1068px) { .outcome-card__content { width: 59%; } }
+@media (max-width: 480px) { .outcome-card__content { width: 100%; } }
+
+/* ---------- Seven connected goals, v2 — soft washes, halo icons, light cards ---------- */
+.goal-groups-section--soft { position: relative; overflow: hidden; isolation: isolate; padding-block: var(--section-space); background: var(--color-surface); }
+/* Two soft diagonal washes behind the pillar rows */
+.goal-groups-section--soft::before, .goal-groups-section--soft::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+.goal-groups-section--soft::before { left: calc(var(--space-19) * -0.5); top: 18%; width: calc(var(--space-19) * 2.4); height: calc(var(--space-19) * 1.6); background: linear-gradient(115deg, rgb(0 113 227 / 0) 20%, rgb(0 113 227 / 0.07) 45%, rgb(41 151 255 / 0.04) 60%, rgb(0 113 227 / 0) 80%); transform: rotate(-12deg); }
+.goal-groups-section--soft::after { left: calc(var(--space-19) * -0.8); bottom: 6%; width: calc(var(--space-19) * 2.6); height: calc(var(--space-19) * 1.2); background: linear-gradient(115deg, rgb(41 151 255 / 0) 25%, rgb(41 151 255 / 0.06) 50%, rgb(41 151 255 / 0) 75%); transform: rotate(-16deg); }
+.goal-groups-section--soft .eyebrow { display: inline-flex; align-items: center; gap: var(--space-7); }
+.goal-groups-section--soft .eyebrow::before { content: ""; width: var(--space-15); height: var(--stroke-base); background: var(--color-accent); }
+.goal-groups-section--soft .split-header .link-cta { font-weight: var(--weight-semibold); }
+.goal-groups-section--soft .goal-groups { border-top: 0; }
+.goal-groups-section--soft .goal-group { border-bottom-color: var(--color-border); }
+.goal-groups-section--soft .goal-group:last-child { border-bottom: 0; }
+/* Pillar icon inside a halo ring */
+.goal-group__halo { display: inline-grid; place-items: center; width: calc(var(--space-16) + var(--space-15)); height: calc(var(--space-16) + var(--space-15)); border-radius: var(--radius-lg); background: rgb(0 113 227 / 0.10); }
+.goal-group--visibility .goal-group__halo { background: rgb(29 29 31 / 0.08); }
+.goal-groups-section--soft .goal-group__icon { width: calc(var(--space-16) + var(--space-3)); height: calc(var(--space-16) + var(--space-3)); background: var(--color-accent); box-shadow: 0 var(--space-4) var(--space-12) rgb(0 113 227 / 0.25); }
+.goal-groups-section--soft .goal-group--visibility .goal-group__icon { background: var(--color-surface-dark); box-shadow: 0 var(--space-4) var(--space-12) rgb(29 29 31 / 0.20); }
+.goal-groups-section--soft .goal-group--advocacy .goal-group__icon { background: var(--color-accent); }
+.goal-groups-section--soft .goal-group__icon svg { width: var(--space-15); height: var(--space-15); }
+.goal-groups-section--soft .goal-group__title { margin-top: var(--space-15); font-size: var(--text-9); line-height: var(--lh-50); }
+.goal-group__bar { display: block; width: calc(var(--space-15) + var(--space-7)); height: var(--stroke-heavy); margin-top: var(--space-15); border-radius: var(--radius-lg); background: var(--color-accent); }
+.goal-group--visibility .goal-group__bar { background: var(--color-surface-dark); }
+.goal-groups-section--soft .goal-group__count { margin-top: var(--space-7); font-size: var(--text-sm); line-height: var(--lh-20); font-weight: var(--weight-regular); }
+/* Goal cards: white, soft shadow, number and arrow on one line */
+.goal-groups-section--soft .goal-tile { background: var(--color-surface); border: var(--stroke-hairline) solid var(--color-border); box-shadow: 0 var(--space-1) var(--space-4) rgb(29 29 31 / 0.03), 0 var(--space-7) var(--space-15) rgb(29 29 31 / 0.06); }
+.goal-tile__top { display: flex; justify-content: space-between; align-items: center; }
+.goal-tile__arrow { position: relative; display: inline-grid; place-items: center; width: calc(var(--space-15) + var(--space-3)); height: calc(var(--space-15) + var(--space-3)); border-radius: var(--radius-lg); background: rgb(0 113 227 / 0.08); color: var(--color-accent); transition: var(--transition-colour); }
+.goal-tile__arrow::after { content: ""; position: absolute; inset: calc((var(--hit-target) - var(--space-15) - var(--space-3)) / -2); }
+.goal-tile__arrow .icon-arrow { width: var(--space-9); height: var(--space-9); }
+.goal-tile__arrow:hover { background: var(--color-accent); color: var(--color-on-accent); text-decoration: none; }
+.goal-tile__arrow:hover .icon-arrow { transform: translateX(var(--nudge)); }
+.goal-groups-section--soft .goal-tile__short { font-weight: var(--weight-regular); }
+.goal-groups-section--soft .goal-tile__title { font-weight: var(--weight-semibold); }
+/* Single-goal row: the arrow stays top-right across both columns */
+.goal-group__list .goal-tile:only-child .goal-tile__top { grid-column: 1 / -1; }
+.goal-group__list .goal-tile:only-child .goal-tile__body { grid-row: 2 / span 3; }
+@media (max-width: 734px) {
+  .goal-groups-section--soft .goal-group__title { font-size: var(--text-3xl); line-height: var(--lh-32); }
+  .goal-group__halo { width: calc(var(--space-16) + var(--space-12)); height: calc(var(--space-16) + var(--space-12)); }
+}
+/* Task Forces page: pillar groups reached from the goal arrows clear the sticky header */
+#growth, #visibility, #advocacy { scroll-margin-top: calc(var(--nav-height) + var(--space-15)); }
+
+/* ---------- Seven connected goals, v3 — pillar colour-coding within the brand palette ---------- */
+.goal-group--growth { --pillar: var(--color-accent); --pillar-ink: var(--color-on-accent); --pillar-text: var(--color-accent); --pillar-tint: rgb(0 113 227 / 0.10); }
+.goal-group--visibility { --pillar: var(--color-surface-dark); --pillar-ink: var(--color-text-on-dark); --pillar-text: var(--color-text-primary); --pillar-tint: rgb(29 29 31 / 0.07); }
+/* Sky blue is too light for a white glyph (under 3:1), so its icon is dark and its text uses the link blue */
+.goal-group--advocacy { --pillar: var(--color-link-on-dark); --pillar-ink: var(--color-text-primary); --pillar-text: var(--color-link); --pillar-tint: rgb(41 151 255 / 0.14); }
+/* Header: divider under the intro */
+.goal-groups-section--soft .split-header { padding-bottom: var(--space-16); border-bottom: var(--stroke-hairline) solid var(--color-border-strong); margin-bottom: 0; }
+.goal-groups-section--soft .goal-group { border-bottom-color: var(--color-border-strong); }
+.goal-groups-section--soft .goal-group:last-child { border-bottom: 0; }
+/* Pillar: solid icon disc, no halo */
+.goal-groups-section--soft .goal-group__halo { width: auto; height: auto; background: none; }
+.goal-groups-section--soft .goal-group__icon, .goal-groups-section--soft .goal-group--visibility .goal-group__icon, .goal-groups-section--soft .goal-group--advocacy .goal-group__icon { width: calc(var(--space-16) + var(--space-7)); height: calc(var(--space-16) + var(--space-7)); background: var(--pillar); color: var(--pillar-ink); box-shadow: 0 var(--space-4) var(--space-12) var(--pillar-tint); }
+.goal-groups-section--soft .goal-group__title { margin-top: var(--space-12); }
+.goal-groups-section--soft .goal-group__count { margin-top: var(--space-15); color: var(--color-text-primary); font-size: var(--text-xs); line-height: var(--lh-16); font-weight: var(--weight-semibold); letter-spacing: 0.04em; }
+.goal-groups-section--soft .goal-group__bar, .goal-groups-section--soft .goal-group--visibility .goal-group__bar { width: var(--space-15); margin-top: var(--space-4); background: var(--pillar); }
+/* Goal cards: pillar-coloured left edge, number in pillar colour, icon top-right */
+.goal-groups-section--soft .goal-tile { border: 0; border-left: var(--stroke-heavy) solid var(--pillar); box-shadow: 0 var(--space-1) var(--space-4) rgb(29 29 31 / 0.04), 0 var(--space-7) var(--space-16) rgb(29 29 31 / 0.07); }
+.goal-groups-section--soft .goal-tile__index { color: var(--pillar-text); }
+.goal-tile__icon { display: inline-grid; place-items: center; flex-shrink: 0; width: calc(var(--space-16) - var(--space-4)); height: calc(var(--space-16) - var(--space-4)); border-radius: var(--radius-lg); background: var(--pillar-tint); color: var(--pillar-text); }
+.goal-tile__icon svg { width: var(--space-14); height: var(--space-14); }
+.goal-groups-section--soft .goal-tile__top { align-items: flex-start; }
+.goal-groups-section--soft .goal-tile__title { margin-top: calc(var(--space-7) * -1); }
