@@ -77,7 +77,7 @@ const href = u => !u ? "" : u.startsWith("#") || /^https?:|^mailto:/.test(u) ? u
 const fmtDate = d => d ? new Date(d + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "";
 const theme = t => t === "Surface" ? "section section--alt" : t === "Primary" ? "section theme-dark" : "section";
 const arrow = `<svg class="icon-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const btn = (label, url, kind = "primary") => label && url ? `<a class="btn btn--${kind}" href="${href(url)}">${esc(label)}${kind === "primary" ? "" : " " + arrow}</a>` : "";
+const btn = (label, url, kind = "primary") => label && url ? `<a class="btn btn--${kind}" href="${href(url)}">${esc(label)} ${arrow}</a>` : "";
 const linkCta = (label, url) => label && url ? `<a class="link-cta" href="${href(url)}">${esc(label)}</a>` : "";
 const statusBadge = s => s ? `<span class="status status--${s.toLowerCase()}">${esc(s)}</span>` : "";
 const sectionHead = (s, center = true) => `<header class="section-header${center ? "" : " section-header--left"}">${s.Eyebrow ? `<span class="eyebrow">${esc(sentence(s.Eyebrow))}</span>` : ""}<h2 class="headline-section">${esc(s.Heading)}</h2>${s["Body HTML"] ? `<div class="lede-html">${s["Body HTML"]}</div>` : ""}</header>`;
@@ -741,7 +741,7 @@ for (const p of portals) {
 if (existsSync(OUT)) rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 cpSync(join(websiteDir, "dist", "assets"), join(OUT, "assets"), { recursive: true });
-writeFileSync(join(OUT, "assets", "css", "nxt-2026.css"), readFileSync(join(here, "nxt-2026.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-home.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-vision.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-how.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-footer.css"), "utf8"));
+writeFileSync(join(OUT, "assets", "css", "nxt-2026.css"), readFileSync(join(here, "nxt-2026.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-home.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-vision.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-how.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-footer.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-roveia.css"), "utf8") + String.fromCharCode(10) + readFileSync(join(here, "nxt-2026-motion.css"), "utf8"));
 cpSync(join(here, "nxt-2026.js"), join(OUT, "assets", "js", "nxt-2026.js"));
 const write = (path, html) => { const dir = join(OUT, path); mkdirSync(dir, { recursive: true }); writeFileSync(join(dir, "index.html"), html); };
 for (const p of outPages) write(p.path, layout(p));

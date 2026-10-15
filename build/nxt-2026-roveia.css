@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Roveia-inspired layer (reference: roveia.com), built only from the project tokens.
+   Floating capsule navigation, light display type with tight tracking, inset rounded
+   panels, black pill buttons on light surfaces and big numbered lists.
+   Remove this file from the build to return to the previous look.
+   ========================================================================== */
+:root {
+  /* Larger corners derived from the existing radius token */
+  --radius-card: calc(var(--radius-md) * 2);
+  --radius-panel: calc(var(--radius-md) * 3);
+  --nav-float-gap: var(--space-4);
+  --panel-inset: var(--space-7);
+}
+
+/* ---------- Floating capsule navigation ---------- */
+.globalnav { padding: var(--nav-float-gap) var(--gutter) 0; border-bottom: 0; }
+.globalnav::before { display: none; }
+.globalnav__inner {
+  max-width: var(--wide-width);
+  height: calc(var(--nav-height) - var(--space-4));
+  padding-inline: var(--space-15) var(--space-4);
+  border: var(--stroke-hairline) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-nav);
+  -webkit-backdrop-filter: var(--blur-nav);
+  backdrop-filter: var(--blur-nav);
+  box-shadow: 0 var(--space-4) var(--space-15) rgb(29 29 31 / 0.08);
+}
+.globalnav__link[aria-current="page"]::after { display: none; }
+.globalnav__link[aria-current="page"] { color: var(--color-link); }
+@media (max-width: 833px) {
+  .globalnav__inner { padding-inline: var(--space-12) var(--space-4); }
+  /* The open menu starts below the floating capsule */
+  /* The capsule (backdrop-filter) is the containing block, so position against it */
+  .globalnav__menu { inset: calc(100% + var(--space-4)) 0 auto 0; max-height: calc(100vh - var(--nav-height) - var(--space-16)); border: var(--stroke-hairline) solid var(--color-border); border-radius: var(--radius-card); box-shadow: 0 var(--space-12) var(--space-16) rgb(29 29 31 / 0.12); }
+}
+
+/* ---------- Display type: light weight, tight tracking ---------- */
+.headline-hero { font-weight: var(--weight-light); letter-spacing: -0.03em; }
+.headline-section { font-weight: var(--weight-regular); letter-spacing: -0.02em; }
+.headline-sub, .tf-card__title, .tf-feature__title, .init-card__title, .update-row__title, .how-pillar__title, .horizon-line__title, .lead-initiative__title { letter-spacing: -0.01em; }
+
+/* ---------- Inset rounded panels for heroes and dark bands ---------- */
+main > .hero--image, main > .list-hero, main > .how-hero, main > .hero--dark {
+  margin: var(--panel-inset) var(--gutter) 0;
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+  isolation: isolate;
+}
+main > section.theme-dark:not(.how-hero):not(.list-hero), main > .closing, main > .work-section--visual, main > .tf-section--visual {
+  margin: var(--panel-inset) var(--gutter);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+.footer__cta { border-radius: var(--radius-panel); }
+@media (max-width: 734px) {
+  main > .hero--image, main > .list-hero, main > .how-hero, main > .hero--dark,
+  main > section.theme-dark:not(.how-hero):not(.list-hero), main > .closing, main > .work-section--visual, main > .tf-section--visual { margin-inline: var(--space-4); border-radius: var(--radius-card); }
+}
+
+/* ---------- Buttons: black pill on light surfaces, blue on dark; arrow on primary ---------- */
+.btn--primary { background: var(--color-1); color: var(--color-7); }
+.btn--primary:hover { background: var(--color-link); color: var(--color-7); }
+.btn--primary:active { background: var(--color-link); }
+:is(.theme-dark, .hero--dark, .hero--image, .list-hero, .how-hero) .btn--primary { background: var(--color-accent); color: var(--color-7); }
+:is(.theme-dark, .hero--dark, .hero--image, .list-hero, .how-hero) .btn--primary:hover { background: var(--color-7); color: var(--color-1); }
+.btn .icon-arrow { transition: transform var(--duration-base) var(--ease); }
+.btn:hover .icon-arrow { transform: translateX(var(--space-1)); }
+@media (prefers-reduced-motion: reduce) { .btn .icon-arrow { transition: none; } .btn:hover .icon-arrow { transform: none; } }
+
+/* ---------- Cards: soft grey fills, larger corners ---------- */
+.tf-card, .work-card, .update-card, .init-card, .update-row, .portal-card, .gateway-card, .goal-tile, .outcome-card,
+.how-pillar, .stepper__card, .horizon-line__item, .contrib__item, .lead-initiative, .acc-panel, .form--nxt, .tf-feature,
+.work-layout__main, .work-layout__side, .partner-table__cell, .tf-more { border-radius: var(--radius-card); }
+:is(.tf-card, .work-card, .update-card, .init-card, .update-row, .tf-feature, .how-pillar, .goal-tile, .outcome-card) .stretched::after { border-radius: var(--radius-card); }
+.tf-card__media, .update-row__media { border-radius: calc(var(--radius-card) - var(--space-1)); }
+
+/* ---------- Big numbered lists (home "Our operating focus") ---------- */
+.pillar-list__item { align-items: start; padding-block: var(--space-16); }
+.pillar-list__index { font-size: var(--text-sm); color: var(--color-text-secondary); }
+.pillar-list__title { margin-top: var(--space-1); font-family: var(--font-display); font-size: var(--text-10); line-height: var(--lh-60); font-weight: var(--weight-light); letter-spacing: -0.03em; }
+.pillar-list__item:hover .pillar-list__title { color: var(--color-link); }
+@media (max-width: 734px) { .pillar-list__title { font-size: var(--text-9); line-height: var(--lh-50); } }
+
+/* ---------- Eyebrows: quiet, sentence case, with the brand dot ---------- */
+.section .eyebrow:not(.how-header .eyebrow):not(.contrib__head .eyebrow):not(.expect__text .eyebrow) { display: inline-flex; align-items: center; gap: var(--space-4); }
+.section .eyebrow:not(.how-header .eyebrow):not(.contrib__head .eyebrow):not(.expect__text .eyebrow)::before { content: ""; width: var(--space-3); height: var(--space-3); border-radius: var(--radius-lg); background: var(--color-accent); }
+
+/* Breathing room under the light display headings */
+.hero--nxt .hero__title, .list-hero .hero__title, .how-hero .headline-hero { margin-bottom: var(--space-12); }
+
+/* Hero secondary buttons: white outline and text on every page hero */
+main > :is(.hero--image, .list-hero, .how-hero, .hero--dark) .btn--secondary { color: var(--color-7); border-color: var(--color-7); }
+main > :is(.hero--image, .list-hero, .how-hero, .hero--dark) .btn--secondary:hover { background: var(--color-7); color: var(--color-1); border-color: var(--color-7); }
+main > :is(.hero--image, .list-hero, .how-hero, .hero--dark) .btn--secondary:focus-visible { outline-color: var(--color-7); }
+
+/* Home featured task-force photo cards: no blue edge on the photo side */
+.tf-feature--photo { border-left: 0; }
+
+/* Home "The alliance" partner grid: separate rounded tiles instead of a ruled grid,
+   so the rounded corners no longer show the grid's grey background */
+.partner-table { gap: var(--space-7); overflow: visible; border: 0; border-radius: 0; background: none; }
+.partner-table__cell { overflow: hidden; border: var(--stroke-hairline) solid var(--color-border); border-radius: var(--radius-card); }
+.partner-table__cell--cta { border-color: transparent; }
+.partner-table__join { border-radius: inherit; }

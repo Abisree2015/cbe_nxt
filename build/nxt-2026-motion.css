@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Hero and scroll motion (all pages). Timings come from the motion tokens.
+   Everything that moves sits inside prefers-reduced-motion: no-preference,
+   and reveal states only apply once the script adds .motion to <html>,
+   so content is never hidden without JavaScript or for reduced-motion users.
+   ========================================================================== */
+
+/* ---------- Heroes: taller, content centred vertically ---------- */
+main > .hero--image { min-height: min(84vh, 860px); }
+main > .list-hero, main > .how-hero { display: flex; align-items: center; min-height: min(72vh, 760px); }
+main > .list-hero > .list-hero__inner, main > .how-hero > .how-hero__grid { width: 100%; }
+main > .detail-hero { min-height: min(72vh, 720px); }
+/* Soft fade at the foot of photo heroes so the scroll cue reads */
+main > :is(.hero--image, .list-hero, .how-hero)::after {
+  content: ""; position: absolute; inset: auto 0 0; z-index: 1; height: var(--space-18);
+  background: linear-gradient(0deg, var(--color-image-fade-mid), transparent); pointer-events: none;
+}
+.hero--image .hero__overlay, .list-hero__inner, .how-hero__grid { position: relative; z-index: 2; }
+@media (max-width: 734px) {
+  main > .hero--image, main > .list-hero, main > .how-hero, main > .detail-hero { min-height: min(78vh, 640px); }
+}
+
+/* ---------- Scroll cue (decorative) ---------- */
+.scroll-cue {
+  position: absolute; z-index: 3; left: 50%; bottom: var(--space-12);
+  width: calc(var(--space-12) + var(--space-1)); height: calc(var(--space-15) + var(--space-4));
+  translate: -50% 0; border: var(--stroke-thick) solid var(--color-border-on-dark); border-radius: var(--radius-lg);
+  pointer-events: none;
+}
+.scroll-cue::before {
+  content: ""; position: absolute; left: 50%; top: var(--space-3);
+  width: var(--space-1); height: var(--space-4); translate: -50% 0;
+  border-radius: var(--radius-lg); background: var(--color-text-on-dark);
+}
+.hero--video .scroll-cue { bottom: var(--space-12); }
+
+/* ---------- Navigation: firmer capsule once the page scrolls ---------- */
+.globalnav__inner { transition: box-shadow var(--duration-slow) var(--ease), background-color var(--duration-slow) var(--ease); }
+.globalnav.is-scrolled .globalnav__inner { box-shadow: 0 var(--space-4) var(--space-16) rgb(29 29 31 / 0.14); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero entrance: copy rises in sequence, background settles from a slight zoom */
+  @keyframes nxt-rise { from { opacity: 0; translate: 0 var(--space-15); } to { opacity: 1; translate: 0 0; } }
+  @keyframes nxt-settle { from { scale: 1.08; } to { scale: 1; } }
+  @keyframes nxt-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes nxt-cue { 0% { opacity: 0; translate: -50% 0; } 30% { opacity: 1; } 80% { opacity: 0; translate: -50% var(--space-7); } 100% { opacity: 0; translate: -50% var(--space-7); } }
+
+  main > :first-child :is(.back-link, .detail-hero__meta, .eyebrow, .headline-hero, .hero__title, .lede, .campaign-line, .how-hero__campaign, .hero__ctas, .hero-chips) {
+    animation: nxt-rise calc(var(--duration-slow) * 3) var(--ease) both;
+  }
+  main > :first-child :is(.back-link, .detail-hero__meta, .eyebrow) { animation-delay: calc(var(--duration-delay) * 1); }
+  main > :first-child :is(.headline-hero, .hero__title) { animation-delay: calc(var(--duration-delay) * 2); }
+  main > :first-child .lede { animation-delay: calc(var(--duration-delay) * 4); }
+  main > :first-child :is(.campaign-line, .how-hero__campaign) { animation-delay: calc(var(--duration-delay) * 5); }
+  main > :first-child .hero__ctas { animation-delay: calc(var(--duration-delay) * 6); }
+  main > :first-child .hero-chips { animation-delay: calc(var(--duration-delay) * 8); }
+  main > :first-child .how-hero__visual { animation: nxt-fade calc(var(--duration-slow) * 4) var(--ease) calc(var(--duration-delay) * 5) both; }
+  main > :first-child :is(.hero__bg, .hero__video, .how-hero__bg, .list-hero__mosaic) { animation: nxt-settle calc(var(--duration-slow) * 6) var(--ease) both; }
+  .scroll-cue::before { animation: nxt-cue calc(var(--duration-slow) * 6) var(--ease) calc(var(--duration-delay) * 12) infinite; }
+  .scroll-cue { animation: nxt-fade var(--duration-slow) var(--ease) calc(var(--duration-delay) * 10) both; }
+
+  /* Hero parallax is driven by the script through the individual translate property */
+  main > :first-child :is(.hero__bg, .hero__video, .how-hero__bg, .list-hero__mosaic) { will-change: translate; }
+
+  /* Scroll reveal: headers and grid items fade and rise, items staggered */
+  .motion [data-reveal] {
+    opacity: 0; translate: 0 var(--space-15);
+    transition: opacity calc(var(--duration-slow) * 2.5) var(--ease), translate calc(var(--duration-slow) * 2.5) var(--ease);
+    transition-delay: calc(var(--reveal-i, 0) * var(--duration-delay));
+  }
+  .motion [data-reveal].is-revealed { opacity: 1; translate: 0 0; }
+}
+
+@media print {
+  [data-reveal] { opacity: 1 !important; translate: none !important; }
+  .scroll-cue { display: none; }
+}
+
+/* ---------- Navbar: wide bar at the top, morphs into a narrower pill on scroll (and back) ---------- */
+.globalnav__inner {
+  max-width: calc(var(--wide-width) + var(--space-16) * 2);
+  border-radius: var(--radius-md);
+}
+.globalnav.is-scrolled .globalnav__inner {
+  max-width: calc(var(--wide-width) - var(--space-16));
+  border-radius: var(--radius-lg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .globalnav__inner {
+    transition: max-width calc(var(--duration-slow) * 1.5) var(--ease), border-radius calc(var(--duration-slow) * 1.5) var(--ease),
+      box-shadow var(--duration-slow) var(--ease), background-color var(--duration-slow) var(--ease);
+  }
+}
