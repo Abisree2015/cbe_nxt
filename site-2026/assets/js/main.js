@@ -3,7 +3,7 @@
   'use strict';
 
   var root = document.body.getAttribute('data-root') || './';
-  var mobileNav = window.matchMedia('(max-width: 833px)');
+  var mobileNav = window.matchMedia('(max-width: 1099px)');
 
   /* ---------- Global navigation ---------- */
   var nav = document.querySelector('[data-globalnav]');

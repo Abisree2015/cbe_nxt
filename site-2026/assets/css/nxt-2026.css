@@ -5,7 +5,7 @@
 /* Header: primary CTA beside search; the CTA moves into the menu on small screens */
 .globalnav__cta { white-space: nowrap; }
 .globalnav__item--mobile-only { display: none; }
-@media (max-width: 833px) {
+@media (max-width: 1099px) {
   .globalnav__cta { display: none; }
   .globalnav__item--mobile-only { display: block; }
 }
@@ -1127,7 +1127,7 @@ body:has(.closing) .footer__grid { padding-top: var(--space-16); }
 }
 .globalnav__link[aria-current="page"]::after { display: none; }
 .globalnav__link[aria-current="page"] { color: var(--color-link); }
-@media (max-width: 833px) {
+@media (max-width: 1099px) {
   .globalnav__inner { padding-inline: var(--space-12) var(--space-4); }
   /* The open menu starts below the floating capsule */
   /* The capsule (backdrop-filter) is the containing block, so position against it */
@@ -1202,6 +1202,87 @@ main > :is(.hero--image, .list-hero, .how-hero, .hero--dark) .btn--secondary:foc
 .partner-table__cell { overflow: hidden; border: var(--stroke-hairline) solid var(--color-border); border-radius: var(--radius-card); }
 .partner-table__cell--cta { border-color: transparent; }
 .partner-table__join { border-radius: inherit; }
+
+/* ==========================================================================
+   Typeface: Montserrat on every page (loaded from Google Fonts in <head>);
+   the previous system stack stays as the fallback while it loads.
+   ========================================================================== */
+:root {
+  --font-text: "Montserrat", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Noto Sans Tamil", "Latha", sans-serif;
+  --font-display: "Montserrat", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, "Noto Sans Tamil", "Latha", sans-serif;
+}
+/* Montserrat is wider than SF Pro, so loosen the very tight display tracking */
+.headline-hero { letter-spacing: -0.02em; }
+.headline-section { letter-spacing: -0.015em; }
+.pillar-list__title { letter-spacing: -0.02em; }
+
+/* ---------- Navigation: larger text ---------- */
+.globalnav__link { font-size: var(--text-sm); line-height: var(--lh-20); letter-spacing: 0; font-weight: var(--weight-regular); }
+.navsearch, .navsearch__label, .globalnav__cta { font-size: var(--text-sm); line-height: var(--lh-20); }
+.globalnav__submenu a { font-size: var(--text-sm); }
+@media (min-width: 1100px) {
+  .globalnav__link { font-size: var(--text-base); line-height: var(--lh-25); padding-inline: var(--space-9); }
+  .navsearch, .navsearch__label, .globalnav__cta { font-size: var(--text-base); line-height: var(--lh-25); }
+  .globalnav__submenu a { font-size: var(--text-base); }
+}
+@media (max-width: 1099px) { .globalnav__link { font-size: var(--text-2xl); line-height: var(--lh-32); } }
+
+/* ==========================================================================
+   Pathway cards (home gateway and Opportunities): image on top, icon straddling
+   the image edge, then heading, text and a "label + round arrow" button.
+   ========================================================================== */
+.gateway-card { border-radius: var(--radius-panel); box-shadow: none; }
+.gateway-card__img { aspect-ratio: 5 / 4; }
+.gateway-card__body { display: block; position: relative; padding: 0 var(--space-15); }
+.gateway-card__icon {
+  display: grid; place-items: center; position: relative; z-index: 1;
+  width: var(--space-16); height: var(--space-16); margin-top: calc(var(--space-16) / -2);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+  box-shadow: 0 0 0 var(--space-3) var(--color-surface);
+}
+.gateway-card:nth-child(even) .gateway-card__icon { background: color-mix(in srgb, var(--color-text-primary) 7%, var(--color-surface)); }
+.gateway-card__icon svg { width: var(--space-14); height: var(--space-14); }
+.gateway-card__text { margin-top: var(--space-12); }
+.gateway-card__title { font-size: var(--text-2xl); line-height: var(--lh-32); font-weight: var(--weight-semibold); letter-spacing: -0.01em; }
+.gateway-card__kicker { margin-top: var(--space-4); font-size: var(--text-base); line-height: var(--lh-25); }
+.gateway-card__cta { justify-content: flex-start; gap: var(--space-9); margin-top: auto; padding: var(--space-15); font-size: var(--text-base); line-height: var(--lh-25); }
+.gateway-card__text + * { margin-top: 0; }
+.gateway-card__body { padding-bottom: var(--space-12); }
+.gateway-card__arrow { width: var(--hit-target); height: var(--hit-target); }
+.gateway-card__arrow .icon-arrow { width: var(--space-11); height: var(--space-11); }
+.gateway-card__title .stretched::after { border-radius: var(--radius-panel); }
+@media (max-width: 734px) {
+  .gateway-card__img { aspect-ratio: 4 / 3; }
+  .gateway-card__title { font-size: var(--text-xl); line-height: var(--lh-32); }
+}
+
+/* Search: compact round button at every width (frees room for the larger Montserrat navigation) */
+.navsearch { min-width: 0; width: var(--hit-target); height: var(--hit-target); justify-content: center; padding: 0; border-radius: var(--radius-lg); }
+.navsearch__label { display: none; }
+.navsearch svg { width: var(--space-11); height: var(--space-11); }
+/* Navigation text scale: 14px from 1100px to 1279px, 17px beyond */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .globalnav__link { font-size: var(--text-sm); }
+}
+
+/* Task Forces cards: the "pillar + View task force" footer sits at the very end of every card,
+   so the divider and both items line up across a row whatever the text length */
+.tf-card--photo { height: 100%; }
+.tf-card--photo .tf-card__purpose { margin-bottom: var(--space-12); }
+.tf-card--photo .tf-card__purpose + .tf-card__foot, .tf-card--photo .tf-card__foot { margin-top: auto; }
+
+/* Navigation: a little taller */
+.globalnav__inner { height: var(--nav-height); }
+
+/* ---------- Partner cards: organisation logos ---------- */
+.partner-table__short--logo, .partner__short--logo { display: flex; align-items: center; justify-content: flex-start; height: var(--space-16); }
+.partner-logo { display: block; width: auto; height: auto; max-width: 92%; max-height: var(--space-16); object-fit: contain; object-position: left center; }
+/* White artwork (CII) sits on a dark plate, as in the footer */
+.partner-logo--dark { box-sizing: content-box; max-height: calc(var(--space-16) - var(--space-12) - var(--space-4)); padding: var(--space-3) var(--space-9); background: var(--color-surface-dark); border-radius: var(--radius-sm); }
+/* Keep the text names for any partner without a logo the same height, so rows stay aligned */
+.partner-table__short:not(.partner-table__short--logo), .partner__short:not(.partner__short--logo) { display: flex; align-items: center; height: var(--space-16); }
+.partner-table__cell--cta .partner-table__short { height: var(--space-16); }
 
 /* ==========================================================================
    Hero and scroll motion (all pages). Timings come from the motion tokens.

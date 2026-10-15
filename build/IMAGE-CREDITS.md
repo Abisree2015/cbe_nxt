@@ -32,3 +32,20 @@ Downloaded on 14 October 2026 from Unsplash under the Unsplash License. Each is 
 The `tf-*.jpg` photos above also head their own task-force pages. All other hero photos are existing site images.
 
 Photo page for any ID: `https://unsplash.com/photos/<ID>`
+
+## Partner logos
+
+Downloaded on 15 October 2026 from each organisation's own website and shown on the partner cards (Home and Alliance). They are the organisations' trademarks: confirm each organisation's approval before the site goes live. CII reuses the logo already on the site. The KGF and RAAC logos were supplied by the client (not downloaded).
+
+| File (images/partners/) | Organisation | Source |
+|---|---|---|
+| codissia.png | CODISSIA | codissia.com/assets/logo-e-H_6sfy.png |
+| iccic.jpg | Indian Chamber of Commerce and Industry, Coimbatore | iccicbe.in/wp-content/uploads/2022/02/ICCIC-Logo.jpg |
+| credai-coimbatore.png | CREDAI Coimbatore | credaicoimbatore.com/lib/images/logo.png |
+| siema.png | SIEMA | siema.org/images/SIEMA-logo.png (resized) |
+| sima.png | SIMA | simamills.in/wp-content/themes/sima/images/logo-mob.png |
+| iif.jpg | Indian Institute of Foundrymen | indianfoundry.org/upload/fckimg/IIF Logo (1).jpg (resized) |
+| siruthuli.png | Siruthuli | siruthulingo.org/wp-content/uploads/2024/05/cropped-Siruthuli-logo-3.png |
+| young-indians.png | Young Indians | yicoimbatore.com/images/brands/young-indians-logo-tight.png |
+| kgf.png | Kongu Global Forum (KGF) card | Supplied by the client. The artwork reads "Global Kongu Foundation (GKF)": confirm it is the right organisation |
+| raac.png | Residents Awareness Association of Coimbatore | Supplied by the client |

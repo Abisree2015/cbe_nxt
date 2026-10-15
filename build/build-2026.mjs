@@ -116,6 +116,9 @@ function layout({ path, title, description, body }) {
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:site_name" content="Coimbatore NXT">
   <link rel="icon" href="/assets/images/digital_nxt.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/nxt-2026.css">
   <script src="/assets/js/main.js" defer></script>
@@ -324,7 +327,7 @@ const workSection = s => {
 const allianceSection = s => `<section class="${theme(s.Theme)} alliance-home" aria-labelledby="${s.Slug}-title">
   <div class="container container--wide alliance-home__grid">
     <div class="alliance-home__intro">${eyebrowH(s)}<div class="lede-html focus__lede">${s["Body HTML"]}</div><p class="alliance-home__count"><span>${partners.length}</span> partner organisations</p>${sectionCta(s, false)}</div>
-    <ul class="partner-table list-reset">${partners.map(p => `<li class="partner-table__cell"><span class="partner-table__short">${esc(p["Short Name"])}</span><span class="partner-table__name">${esc(p.Name)}</span><span class="partner-table__cat">${esc(p.Category)}</span></li>`).join("")}<li class="partner-table__cell partner-table__cell--cta"><a class="partner-table__join" href="/get-involved/"><span class="partner-table__short">+</span><span class="partner-table__name">Partner with us</span><span class="partner-table__cat">Bring your organisation’s strengths to the shared agenda</span></a></li></ul>
+    <ul class="partner-table list-reset">${partners.map(p => `<li class="partner-table__cell"><span class="partner-table__short${PARTNER_LOGO[p.Slug] ? " partner-table__short--logo" : ""}">${partnerLogo(p, p["Short Name"]) || esc(p["Short Name"])}</span><span class="partner-table__name">${esc(p.Name)}</span><span class="partner-table__cat">${esc(p.Category)}</span></li>`).join("")}<li class="partner-table__cell partner-table__cell--cta"><a class="partner-table__join" href="/get-involved/"><span class="partner-table__short">+</span><span class="partner-table__name">Partner with us</span><span class="partner-table__cat">Bring your organisation’s strengths to the shared agenda</span></a></li></ul>
   </div>
 </section>`;
 const pillarKey = n => n.toLowerCase();
@@ -539,7 +542,11 @@ const updateCard = u => `<article class="update-card">
   <p class="update-card__excerpt">${esc(u.Excerpt)}</p>
   <span class="link-cta" aria-hidden="true">Read update</span>
 </article>`;
-const partnerGrid = () => `<ul class="partner-grid list-reset">${partners.map(p => `<li class="partner"><span class="partner__short" aria-hidden="true">${esc(p["Short Name"])}</span><span class="partner__name">${esc(p.Name)}</span><span class="partner__category">${esc(p.Category)}</span>${p.Description ? `<span class="partner__desc">${esc(p.Description)}</span>` : ""}</li>`).join("")}</ul>`;
+// Partner logos (sources in build/IMAGE-CREDITS.md). "dark" logos are white artwork and sit on a dark plate.
+// Logos supplied by the client for KGF and RAAC are in partners/kgf.png and partners/raac.png.
+const PARTNER_LOGO = { cii: ["cii_logo-300x186.png", "dark"], codissia: ["partners/codissia.png"], "indian-chamber-coimbatore": ["partners/iccic.jpg"], "credai-coimbatore": ["partners/credai-coimbatore.png"], siema: ["partners/siema.png"], sima: ["partners/sima.png"], iif: ["partners/iif.jpg"], siruthuli: ["partners/siruthuli.png"], "young-indians": ["partners/young-indians.png"], "kongu-global-forum": ["partners/kgf.png"], raac: ["partners/raac.png"] };
+const partnerLogo = (p, alt) => { const l = PARTNER_LOGO[p.Slug]; return l ? `<img class="partner-logo${l[1] ? " partner-logo--" + l[1] : ""}" src="/assets/images/${l[0]}" alt="${esc(alt)}" loading="lazy" decoding="async">` : ""; };
+const partnerGrid = () => `<ul class="partner-grid list-reset">${partners.map(p => `<li class="partner"><span class="partner__short${PARTNER_LOGO[p.Slug] ? " partner__short--logo" : ""}" aria-hidden="true">${partnerLogo(p, "") || esc(p["Short Name"])}</span><span class="partner__name">${esc(p.Name)}</span><span class="partner__category">${esc(p.Category)}</span>${p.Description ? `<span class="partner__desc">${esc(p.Description)}</span>` : ""}</li>`).join("")}</ul>`;
 const partnerStrip = () => `<ul class="partner-strip list-reset" aria-label="Partner organisations">${partners.map(p => `<li title="${esc(p.Name)}"><abbr title="${esc(p.Name)}">${esc(p["Short Name"])}</abbr></li>`).join("")}</ul>`;
 const goalList = () => `<ol class="goal-grid list-reset">${goals.map((g, i) => `<li class="goal-item"><span class="goal-item__index">${String(i + 1).padStart(2, "0")}</span><h3 class="goal-item__title">${esc(g.Name)}</h3><p class="goal-item__short">${esc(g["Short Description"])}</p><div class="goal-item__body">${g["Body HTML"]}</div><span class="goal-item__pillar">${esc(g["Primary Pillar"])}</span></li>`).join("")}</ol>`;
 const empty = (title, text) => `<div class="empty-state"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><p class="empty-state__title">${esc(title)}</p><p>${esc(text)}</p></div>`;
@@ -597,7 +604,7 @@ const strip = h => String(h).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(
     if (s.Slug === "home-closing") return closingSection(s);
     return renderSection(s);
   });
-  page("/", p["SEO Title"], p["SEO Description"], hero(p, { image: IMG.home, video: "home-hero" }) + parts.join("\n"), strip(sectionsFor("home").map(s => s.Heading + " " + s["Body HTML"]).join(" ")));
+  page("/", p["SEO Title"], p["SEO Description"], hero(p, { image: IMG.home, video: "home-hero-3" }) + parts.join("\n"), strip(sectionsFor("home").map(s => s.Heading + " " + s["Body HTML"]).join(" ")));
 }
 // Institutional pages built from Page Sections
 const sectionPage = (slug, path, { image, dark, extras = {}, heroAfter = "", mosaic } = {}) => {
@@ -742,6 +749,9 @@ for (const p of portals) {
 if (existsSync(OUT)) rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 cpSync(join(websiteDir, "dist", "assets"), join(OUT, "assets"), { recursive: true });
+// Montserrat is wider than SF Pro, so the compact (menu button) navigation starts at 1099px instead of 833px
+{ const sp = join(OUT, "assets", "css", "styles.css"); writeFileSync(sp, readFileSync(sp, "utf8").split("@media (max-width: 833px)").join("@media (max-width: 1099px)"));
+  const mp = join(OUT, "assets", "js", "main.js"); writeFileSync(mp, readFileSync(mp, "utf8").replace("(max-width: 833px)", "(max-width: 1099px)")); }
 writeFileSync(join(OUT, "assets", "css", "nxt-2026.css"), readFileSync(join(here, "nxt-2026.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-home.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-vision.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-how.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-footer.css"), "utf8") + "\n" + readFileSync(join(here, "nxt-2026-roveia.css"), "utf8") + String.fromCharCode(10) + readFileSync(join(here, "nxt-2026-motion.css"), "utf8"));
 cpSync(join(here, "nxt-2026.js"), join(OUT, "assets", "js", "nxt-2026.js"));
 const write = (path, html) => { const dir = join(OUT, path); mkdirSync(dir, { recursive: true }); writeFileSync(join(dir, "index.html"), html); };
