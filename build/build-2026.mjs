@@ -1,7 +1,8 @@
 // Builds the 2026 Coimbatore NXT site from the Framer content-import pack.
 // Usage: node website/build/build-2026.mjs [packDir] [outDir]
 // Reuses the design system (styles, nav, dialogs, search) from website/dist.
-import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -759,4 +760,18 @@ const all = [...redirects.filter(r => r["Redirect Type"] === "301").map(r => [r[
 for (const [from, to] of all) write(from, `<!doctype html><html lang="en-IN"><head><meta charset="utf-8"><title>Moved</title><meta name="robots" content="noindex"><link rel="canonical" href="${href(to)}"><meta http-equiv="refresh" content="0; url=${href(to)}"><script>location.replace(${JSON.stringify(href(to))} + location.hash)</script></head><body><p>This page has moved to <a href="${href(to)}">${href(to)}</a>.</p></body></html>`);
 writeFileSync(join(OUT, "vercel.json"), JSON.stringify({ $schema: "https://openapi.vercel.sh/vercel.json", trailingSlash: true, redirects: all.map(([source, destination]) => ({ source, destination: href(destination), permanent: true })) }, null, 2) + "\n");
 writeFileSync(join(OUT, "redirects.txt"), all.map(([f, t]) => `${f} -> ${href(t)}`).join("\n") + "\n");
+// Cache busting: assets are cached for a day, so stamp CSS/JS links with a content hash.
+// A changed file gets a new URL and browsers fetch it straight away after a deploy.
+{
+  const stamp = {};
+  for (const dir of ["css", "js"]) for (const f of readdirSync(join(OUT, "assets", dir))) {
+    stamp[`/assets/${dir}/${f}`] = createHash("md5").update(readFileSync(join(OUT, "assets", dir, f))).digest("hex").slice(0, 10);
+  }
+  const walkHtml = d => readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walkHtml(join(d, e.name)) : e.name.endsWith(".html") ? [join(d, e.name)] : []);
+  for (const file of walkHtml(OUT)) {
+    const html = readFileSync(file, "utf8");
+    const next = html.replace(/(href|src)="(\/assets\/(?:css|js)\/[^"?]+)"/g, (m, attr, url) => stamp[url] ? `${attr}="${url}?v=${stamp[url]}"` : m);
+    if (next !== html) writeFileSync(file, next);
+  }
+}
 console.log(`Built ${outPages.length} pages and ${all.length} redirects into ${OUT}`);
